@@ -5,7 +5,7 @@ export default async function getUser(
   _request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const tracer = trace.getTracer("your-project-name-tracer");
+  const tracer = trace.getTracer("page-dir-example");
   // NOTE: You can replace `your-project-name-tracer` with the actual name of your tracer
   const span = tracer.startSpan("getUser", undefined, context.active());
   const ms = Math.floor(Math.random() * 1000);
