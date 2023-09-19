@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
+import { VercelToolbar } from '@vercel/toolbar/next';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           return event;
         }}
       />
+        <VercelToolbar />
     </>
   );
 }
