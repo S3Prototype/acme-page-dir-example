@@ -1,23 +1,22 @@
-import type { NextRequest } from "next/server";
+import type { NextFetchEvent } from 'next/server';
 
 export const config = {
-  runtime: "edge",
+  runtime: 'edge',
 };
 
-export default function handler(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  return new Response(
-    JSON.stringify({
-      body: request.body,
-      query: searchParams.get("query"),
-      cookies: request.cookies,
-    }),
-    {
-      status: 200,
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );
+async function getAlbum() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/albums/1');
+  await wait(10000);
+  return res.json();
+}
+
+export default function MyEdgeFunction(
+  request: Request,
+  context: NextFetchEvent,
+) {
+  context.waitUntil(getAlbum().then((json) => console.log({ json })));
+
+  return new Response(`Hello, from ${request.url} I'm an Edge Function!`);
 }

@@ -35,7 +35,7 @@
     "**/*.tsx",
     "pages/api/include-files-example.js",
     ".next/types/**/*.ts"
-  ],
+, "app/api/streaming-docs/streaming-examples/handling-backpressure/route.js"  ],
   "exclude": [
     "node_modules"
   ]
